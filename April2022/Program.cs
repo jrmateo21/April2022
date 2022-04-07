@@ -57,13 +57,16 @@ namespace April2022
 
             // Creating a new record for Time and Materials
 
-            // select Materialsor Time on type code
+            // select Materials or Time on type code
 
 
             
             IWebElement materialtimeDrop = driver.FindElement(By.XPath("//*[@id='TimeMaterialEditForm']/div/div[1]/div/span[1]/span/span[1]"));
             materialtimeDrop.Click();
-            System.Threading.Thread.Sleep(5000);
+            System.Threading.Thread.Sleep(1000);
+            IWebElement materialTimeOption = driver.FindElement(By.XPath("//*[@id='TypeCode_listbox']/li[2]"));
+            materialTimeOption.Click();
+
 
             //materialtimeDrop.SendKeys("T");
              
@@ -116,6 +119,17 @@ namespace April2022
 
             IWebElement actualCode = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
             actualCode.Click();
+
+            if (actualCode.Text == ("ZZZZZZZZZZZZZ02JR01"))
+            {
+
+                Console.WriteLine("Record has been created, Test Passed");
+            }
+            else
+            {
+
+                Console.WriteLine("Record Not Found, Test Failed.");
+            }
 
             
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
