@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using April2022.Utilities;
+using NUnit.Framework;
 using OpenQA.Selenium;
 
 namespace April2022
@@ -13,6 +16,7 @@ namespace April2022
         {
             // Click Create New Button
 
+            //IWebElement createnewButton = driver.FindElement(By.XPath("//*[@id='container']/p/a"));
             IWebElement createnewButton = driver.FindElement(By.XPath("//*[@id='container']/p/a"));
             createnewButton.Click();
 
@@ -22,10 +26,11 @@ namespace April2022
             // select Materials or Time on type code
 
 
-
             IWebElement materialtimeDrop = driver.FindElement(By.XPath("//*[@id='TimeMaterialEditForm']/div/div[1]/div/span[1]/span/span[1]"));
             materialtimeDrop.Click();
             System.Threading.Thread.Sleep(1000);
+
+
             IWebElement materialTimeOption = driver.FindElement(By.XPath("//*[@id='TypeCode_listbox']/li[2]"));
             materialTimeOption.Click();
 
@@ -55,28 +60,36 @@ namespace April2022
 
             IWebElement saveButton = driver.FindElement(By.Id("SaveButton"));
             saveButton.Click();
-            System.Threading.Thread.Sleep(5000);
+            Wait.WaitTobeVisible(driver, "XPATH", "//*[@id='tmsGrid']/div[3]/table/tbody/tr[1]/td[1]",2);
+            
 
             // Click "On  go to last page" button
 
-            IWebElement goToLastPageButton = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]"));
+            IWebElement goToLastPageButton = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]/span"));
             goToLastPageButton.Click();
-            System.Threading.Thread.Sleep(1000);
+            Thread.Sleep(1000);
 
             //Check the record has been created in the table  with value
 
             IWebElement actualCode = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
-            actualCode.Click();
+           
+            //Option 1
+
+            //Assert.That(actualCode.Text == "ZZZZZZZZZZZZZ02JR01", "Actual code and expected code do not much");
+            
+            
+            //Option 2 
 
             if (actualCode.Text == ("ZZZZZZZZZZZZZ02JR01"))
             {
 
-                Console.WriteLine("Record has been created, Test Passed");
+                Assert.Pass("Record has been created, Test Passed!");
+               
             }
             else
             {
 
-                Console.WriteLine("Record Not Found, Test Failed.");
+             Assert.Fail("Record Not Found, Test Failed!");
             }
 
         }

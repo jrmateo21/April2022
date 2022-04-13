@@ -1,5 +1,7 @@
 ﻿using System;
 using April2022.Pages;
+using April2022.Utilities;
+using NUnit.Framework;
 //using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -8,15 +10,18 @@ using OpenQA.Selenium.Support.UI;
 
 
 
-namespace April2022
+namespace April2022.Tests
+
 { 
-    internal class TM_Tests
-    {
-        static void Main(string[] args)
+    [TestFixture]
+    internal class TM_Tests : CommonDriver
+    {   
+        [SetUp]
+        public void LoginFunction()
         {
             //  OPEN CHROME BROWSER
 
-            IWebDriver driver = new ChromeDriver();
+            driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
 
 
@@ -27,19 +32,39 @@ namespace April2022
             // Home Page Obeject Initialization and definition 
             HomePage homePageObject = new HomePage();
             homePageObject.GoToTMPage(driver);
+        }
+        [Test]
+        public void CreateTM_test()
+        {
 
             //  Time and Material /TM  Page Object Initialization and definition 
             TMPage tmPageObject = new TMPage();
             tmPageObject.CreateTM(driver);
 
-            // Edit Time and Material /TM
-            tmPageObject.EditTM(driver);
-
-            // Delete Time and Material /TM
-
-            tmPageObject.DeleteTM(driver);
-
 
         }
+            
+        [Test]
+        public void EditTM_test()
+        {
+            // Edit Time and Material /TM
+            TMPage tmPageObject = new TMPage();
+            tmPageObject.EditTM(driver);
+        }
+        [Test]
+        public void DeleteTM_test()
+        {
+
+
+            // Delete Time and Material /TM
+            TMPage tmPageObject = new TMPage();
+            tmPageObject.DeleteTM(driver);
+
+        }
+
+
+
+
+        
     }
 }
