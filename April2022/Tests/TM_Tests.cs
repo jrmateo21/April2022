@@ -33,7 +33,7 @@ namespace April2022.Tests
             HomePage homePageObject = new HomePage();
             homePageObject.GoToTMPage(driver);
         }
-        [Test]
+        [Test, Order(1) ]
         public void CreateTM_test()
         {
 
@@ -44,14 +44,14 @@ namespace April2022.Tests
 
         }
             
-        [Test]
+        [Test, Order(2)]
         public void EditTM_test()
         {
             // Edit Time and Material /TM
             TMPage tmPageObject = new TMPage();
             tmPageObject.EditTM(driver);
         }
-        [Test]
+        [Test, Order(3)]
         public void DeleteTM_test()
         {
 
@@ -61,10 +61,14 @@ namespace April2022.Tests
             tmPageObject.DeleteTM(driver);
 
         }
+        [TearDown]
+        public void ClosedTestRun()
+        {
+            driver.Quit();
+        }
 
 
 
 
-        
     }
 }
