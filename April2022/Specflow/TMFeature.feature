@@ -19,6 +19,6 @@ Scenario Outline: Edit  time and material record with valid details
 
 	Examples: 
 	| Description |
-	| Time        |
+	| Time       |
 	| Material    |
 	| EditRecord  |
