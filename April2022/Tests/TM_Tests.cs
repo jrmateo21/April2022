@@ -29,7 +29,7 @@ namespace April2022.Tests
             LoginPage loginPageObject = new LoginPage();
             loginPageObject.LoginSteps(driver);
 
-            // Home Page Obeject Initialization and definition 
+            // Home Page Object Initialization and definition 
             HomePage homePageObject = new HomePage();
             homePageObject.GoToTMPage(driver);
         }

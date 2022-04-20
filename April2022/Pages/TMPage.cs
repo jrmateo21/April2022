@@ -35,7 +35,7 @@ namespace April2022
             materialTimeOption.Click();
 
 
-            
+
 
             // Click Code Textbox and enter  a valid code
             IWebElement codeTextbox = driver.FindElement(By.Id("Code"));
@@ -60,8 +60,8 @@ namespace April2022
 
             IWebElement saveButton = driver.FindElement(By.Id("SaveButton"));
             saveButton.Click();
-            Wait.WaitTobeVisible(driver, "XPATH", "//*[@id='tmsGrid']/div[3]/table/tbody/tr[1]/td[1]",2);
-            
+            Wait.WaitTobeVisible(driver, "XPATH", "//*[@id='tmsGrid']/div[3]/table/tbody/tr[1]/td[1]", 2);
+
 
             // Click "On  go to last page" button
 
@@ -69,36 +69,43 @@ namespace April2022
             goToLastPageButton.Click();
             Thread.Sleep(1000);
 
-            //Check the record has been created in the table  with value
+        }
 
+        //Check the record has been created in the table  with value
+        public string GetCode(IWebDriver driver)
+        {
             IWebElement actualCode = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
-            IWebElement actualTypeCode = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[2]"));
-            IWebElement actualDescription = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[3]"));
-            IWebElement actualPrice = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[4]"));
-            //Option 1
-
-            Assert.That(actualCode.Text == "ZZZZZZZZZZZZZ02JR01", "Actual code and expected code do not much");
-            Assert.That(actualTypeCode.Text == "T", "Actual type code and expected type  code do not much");
-            Assert.That(actualDescription.Text == "Des001", "Actual Description and expected type  description do not much ");
-            Assert.That(actualPrice.Text == "$12.00", "Actual price and expected type  price do not much ");
-
-                
-            //Assert.That
-            //Option 2 
-
-           // if (actualCode.Text == ("ZZZZZZZZZZZZZ02JR01"))
-           // {
-
-           //     Assert.Pass("Record has been created, Test Passed!");
-               
-           // }
-           // else
-           // {
-
-          //   Assert.Fail("Record Not Found, Test Failed!");
-          //  }
+            return actualCode.Text;
 
         }
+        
+        public string GetTypecode(IWebDriver driver)
+        {
+            IWebElement actualTypeCode = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[2]"));
+            return actualTypeCode.Text;
+
+
+        }
+
+        public string GetDescrption(IWebDriver driver)
+        {
+
+            IWebElement actualDescription = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[3]"));
+            return actualDescription.Text;
+
+        }
+            
+            
+        public string GetPrice(IWebDriver driver)
+        {
+            IWebElement actualPrice = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[4]"));
+            return actualPrice.Text;
+        
+        }
+
+
+        
+        
         public void EditTM(IWebDriver driver)
         {
             // Wait till the entire Time and Material page is displayed.
@@ -156,6 +163,13 @@ namespace April2022
 
 
         }
+        public string GetEditedDescription(IWebDriver driver)
+        {
+            IWebElement editedDescription = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[3]"));
+            return editedDescription.Text;
+        }
+
+
         public void DeleteTM(IWebDriver driver)
         {
 

@@ -7,7 +7,7 @@ using OpenQA.Selenium;
 
 namespace April2022.Utilities
 {
-    internal class CommonDriver
+    public class CommonDriver
     {
         public static IWebDriver driver;
     }
