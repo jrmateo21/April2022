@@ -11,6 +11,10 @@ namespace April2022.StepDefinitions
     [Binding]
     public class TMFeatureStepDefinitions  : CommonDriver
     {
+        LoginPage loginPageObject = new LoginPage();
+        HomePage homePageObject = new HomePage();
+        TMPage tmPageObject = new TMPage();
+
         [Given(@"I logged into turn up portal successfully\.")]
         public void GivenILoggedIntoTurnUpPortalSuccessfully_()
         {
@@ -19,7 +23,7 @@ namespace April2022.StepDefinitions
 
 
             // Login  Page Object Initialization and definition 
-            LoginPage loginPageObject = new LoginPage();
+            
             loginPageObject.LoginSteps(driver);
 
             
@@ -29,7 +33,7 @@ namespace April2022.StepDefinitions
         public void WhenINavigateToTimeAndMaterialPage()
         {
             // Home Page Object Initialization and definition 
-            HomePage homePageObject = new HomePage();
+           
             homePageObject.GoToTMPage(driver);
 
 
@@ -38,7 +42,7 @@ namespace April2022.StepDefinitions
         [When(@"I create a new time and  material record")]
         public void WhenICreateANewTimeAndMaterialRecord()
         {
-            TMPage tmPageObject = new TMPage();
+            
             tmPageObject.CreateTM(driver);
         }
 
@@ -60,23 +64,24 @@ namespace April2022.StepDefinitions
                 
         }
 
-        [When(@"I update '([^']*)' a new time and  material record")]
-        public void WhenIUpdateANewTimeAndMaterialRecord(string p0)
+
+        [When(@"I update '([^']*)', '([^']*)' and '([^']*)'  a new time and  material record")]
+        public void WhenIUpdateAndANewTimeAndMaterialRecord(string p0, string p1, string p2)
         {
-            TMPage tMPageObject =new TMPage();
-            tMPageObject.EditTM(driver);
-            
+            tmPageObject.EditTM(driver, p0,p1,p2);
 
         }
 
-        [Then(@"the record should have the update '([^']*)'")]
-        public void ThenTheRecordShouldHaveTheUpdate(string p0)
+        [Then(@"the record should have the update '([^']*)', '([^']*)' and '([^']*)'")]
+        public void ThenTheRecordShouldHaveTheUpdateAnd(string p0, string p1, string p2)
         {
-
-            TMPage tmPageObject = new TMPage();
             string editedDescription = tmPageObject.GetEditedDescription(driver);
+            string editedCode = tmPageObject.GetEditedCode(driver);
+            string editedPrice = tmPageObject.GetEditedPrice(driver);
 
-            Assert.That(editedDescription == p0, "Actual description and expected description do not match ");
+            Assert.That(editedDescription == p0, "Actual description and expected description do not match.");
+            Assert.That(editedCode == p1, "Actual code and expected code do not match.");
+            Assert.That(editedPrice == p2, "Actual price and expected price do not match");    
 
         }
 

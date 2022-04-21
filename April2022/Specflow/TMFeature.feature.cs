@@ -109,14 +109,16 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Edit  time and material record with valid details")]
-        [NUnit.Framework.TestCaseAttribute("Des001", null)]
-        [NUnit.Framework.TestCaseAttribute("Material", null)]
-        [NUnit.Framework.TestCaseAttribute("EditRecord", null)]
-        public void EditTimeAndMaterialRecordWithValidDetails(string description, string[] exampleTags)
+        [NUnit.Framework.TestCaseAttribute("Time", "JR", "50", null)]
+        [NUnit.Framework.TestCaseAttribute("Material", "Keyboard", "150", null)]
+        [NUnit.Framework.TestCaseAttribute("EditRecord", "Code", "200", null)]
+        public void EditTimeAndMaterialRecordWithValidDetails(string description, string code, string price, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("Description", description);
+            argumentsOfScenario.Add("Code", code);
+            argumentsOfScenario.Add("Price", price);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Edit  time and material record with valid details", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 14
 this.ScenarioInitialize(scenarioInfo);
@@ -135,10 +137,10 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.When("I navigate to Time and Material page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 17
- testRunner.When(string.Format("I update \'{0}\' a new time and  material record", description), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When(string.Format("I update \'{0}\', \'{1}\' and \'{2}\'  a new time and  material record", description, code, price), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 18
- testRunner.Then(string.Format("the record should have the update \'{0}\'", description), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then(string.Format("the record should have the update \'{0}\', \'{1}\' and \'{2}\'", description, code, price), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

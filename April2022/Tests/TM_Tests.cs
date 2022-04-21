@@ -49,7 +49,7 @@ namespace April2022.Tests
         {
             // Edit Time and Material /TM
             TMPage tmPageObject = new TMPage();
-            tmPageObject.EditTM(driver);
+            tmPageObject.EditTM(driver, "Dummy1", "Dummy2", "Dummy3");
         }
         [Test, Order(3)]
         public void DeleteTM_test()

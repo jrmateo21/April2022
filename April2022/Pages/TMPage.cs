@@ -106,7 +106,7 @@ namespace April2022
 
         
         
-        public void EditTM(IWebDriver driver)
+        public void EditTM(IWebDriver driver, string description, string code , string price )
         {
             // Wait till the entire Time and Material page is displayed.
             Wait.WaitTobeVisible(driver, "XPATH", "//*[@id='tmsGrid']/div[3]/table/tbody/tr[1]/td[1]", 2);
@@ -122,13 +122,17 @@ namespace April2022
 
             IWebElement findRecordCreated = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[1]/td[1]"));
 
-            if(findRecordCreated.Text == "ZZZZZZZZZZZZZ02JR01")
+            if (findRecordCreated.Text == "ZZZZZZZZZZZZZ02JR01")
             {
                 //click the Edit button
-             IWebElement editButton = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[5]/a[1]"));
-             editButton.Click();
+                IWebElement editButton = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[5]/a[1]"));
+                editButton.Click();
 
             }
+            
+
+            
+
             else
             {
                 Assert.Fail("Record not found");
@@ -136,12 +140,12 @@ namespace April2022
             // Edit code
             IWebElement codeTextbox = driver.FindElement(By.Id("Code"));
             codeTextbox.Clear();
-            codeTextbox.SendKeys("EditedZZZZZ02JR01");
+            codeTextbox.SendKeys(code);
 
             // Edit description
             IWebElement descriptionTextbox = driver.FindElement(By.Id ("Description"));
             descriptionTextbox.Clear();
-            descriptionTextbox.SendKeys("EditedDes001");
+            descriptionTextbox.SendKeys(description);
 
 
             //Edit price
@@ -152,7 +156,7 @@ namespace April2022
             priceTag.Click();
             priceTextbox.Clear();
             priceTag.Click();
-            priceTextbox.SendKeys("120");
+            priceTextbox.SendKeys(price);
             
 
             // Save the changes 
@@ -169,6 +173,18 @@ namespace April2022
             return editedDescription.Text;
         }
 
+        public string GetEditedCode(IWebDriver driver)
+        {
+            IWebElement editedCode = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
+            return editedCode.Text;
+
+        }
+
+        public string GetEditedPrice(IWebDriver driver)
+        {
+            IWebElement editedPrice = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[4]"));
+            return editedPrice.Text;
+        }
 
         public void DeleteTM(IWebDriver driver)
         {
