@@ -19,6 +19,6 @@ Scenario Outline: Edit  time and material record with valid details
 
 	Examples: 
 	| Description | Code     | Price |
-	| Time        | JR       | 50    |
-	| Material    | Keyboard | 150   |
-	| EditRecord  | Code     | 200   |
+	| Time        | JR       | $50.00 |
+	| Material    | Keyboard | $150.00|
+	| EditRecord  | Code     | $2,000.00 |

@@ -72,16 +72,20 @@ namespace April2022.StepDefinitions
 
         }
 
+
         [Then(@"the record should have the update '([^']*)', '([^']*)' and '([^']*)'")]
         public void ThenTheRecordShouldHaveTheUpdateAnd(string p0, string p1, string p2)
         {
+            
             string editedDescription = tmPageObject.GetEditedDescription(driver);
             string editedCode = tmPageObject.GetEditedCode(driver);
             string editedPrice = tmPageObject.GetEditedPrice(driver);
 
             Assert.That(editedDescription == p0, "Actual description and expected description do not match.");
             Assert.That(editedCode == p1, "Actual code and expected code do not match.");
-            Assert.That(editedPrice == p2, "Actual price and expected price do not match");    
+            Assert.That(editedPrice == p2, "Actual price and expected price do not match");
+
+
 
         }
 

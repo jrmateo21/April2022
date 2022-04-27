@@ -1,0 +1,203 @@
+{
+	"info": {
+		"_postman_id": "6b69ebc1-3292-47bd-ac27-c68525614fbd",
+		"name": "Dummy API - Employee CRUD End to End Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create new record in database",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a7cdd617-1c1e-4429-a255-d97349dd289b",
+						"exec": [
+							"// Assert 1 : Status Code Check",
+							"",
+							"",
+							"pm.test(\"Record has been Created\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"//Assert 2 : Value Check",
+							"pm.test(\"Check key-value pairs in the response \", function () {",
+							"    var jsonData = pm.response.json();",
+							"    ",
+							"  //NAME CHECK",
+							"    pm.expect(jsonData.data.name).to.eql(\"JRtest\");",
+							"    ",
+							"    ",
+							"    //NAME salary",
+							"    pm.expect(jsonData.data.salary).to.eql(\"123000\");",
+							"    ",
+							"    ",
+							"    //NAME CHECK",
+							"    pm.expect(jsonData.data.age).to.eql(\"28\");",
+							"    ",
+							"    ",
+							"    ",
+							"    ",
+							"    ",
+							"});",
+							"",
+							"",
+							"// Set the environment variable of employeeID",
+							"",
+							"pm.test(\"Check key-value pairs in the response \", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.environment.set(\"employeeID\", jsonData.data.id);",
+							"    ",
+							"    ",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"JRtest\",\n    \"salary\": \"123000\",\n    \"age\": \"28\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/v1/create",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update an employee record",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e0488785-96d1-4bcf-9bc1-e7ca575f957a",
+						"exec": [
+							"// Assert 1 : Check Status Code ",
+							"",
+							"pm.test(\"Record has been updated\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"// Assert 2 : Value Check",
+							"",
+							"pm.test(\"Check key-value pairs in the response\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    ",
+							"    ",
+							"    // name check",
+							"    pm.expect(jsonData.data.name).to.eql(\"JRtest\");",
+							"    ",
+							"    // salary Check",
+							"    pm.expect(jsonData.data.salary).to.eql(\"123000\");",
+							"    ",
+							"    // check age",
+							"    ",
+							"    pm.expect(jsonData.data.age).to.eql(\"65\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"JRtest\",\n    \"salary\": \"123000\",\n    \"age\": \"65\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/v1/update/{{employeeID}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"update",
+						"{{employeeID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete an employee record",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5ece9852-2353-432e-88ba-2f23c2489735",
+						"exec": [
+							"// Assert 1 : Check Code status",
+							"pm.test(\"Record has been deleted\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Check key-value pairs in the response\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    ",
+							"    ",
+							"    pm.expect(jsonData.status).to.eql(\"success\");",
+							"    pm.expect(jsonData.data.toString()).to.eql(pm.environment.get(\"employeeID\").toString());",
+							"    pm.expect(jsonData.message).to.eql(\"Successfully! Record has been deleted\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/v1/delete/{{employeeID}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"delete",
+						"{{employeeID}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

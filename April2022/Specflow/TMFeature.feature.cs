@@ -109,9 +109,9 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Edit  time and material record with valid details")]
-        [NUnit.Framework.TestCaseAttribute("Time", "JR", "50", null)]
-        [NUnit.Framework.TestCaseAttribute("Material", "Keyboard", "150", null)]
-        [NUnit.Framework.TestCaseAttribute("EditRecord", "Code", "200", null)]
+        [NUnit.Framework.TestCaseAttribute("Time", "JR", "$50.00", null)]
+        [NUnit.Framework.TestCaseAttribute("Material", "Keyboard", "$150.00", null)]
+        [NUnit.Framework.TestCaseAttribute("EditRecord", "Code", "$2,000.00", null)]
         public void EditTimeAndMaterialRecordWithValidDetails(string description, string code, string price, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
