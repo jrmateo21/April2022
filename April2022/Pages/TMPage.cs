@@ -106,7 +106,7 @@ namespace April2022
 
         
         
-        public void EditTM(IWebDriver driver, string description, string code , string price )
+        public void EditTM(IWebDriver driver, string description, string code, string price )
         {
             // Wait till the entire Time and Material page is displayed.
             Wait.WaitTobeVisible(driver, "XPATH", "//*[@id='tmsGrid']/div[3]/table/tbody/tr[1]/td[1]", 2);
@@ -154,6 +154,13 @@ namespace April2022
             IWebElement saveButton = driver.FindElement(By.Id("SaveButton"));
             saveButton.Click();
             Wait.WaitTobeVisible(driver, "XPATH", "//*[@id='tmsGrid']/div[3]/table/tbody/tr[1]/td[1]", 2);
+
+            
+            // Click last page button
+            IWebElement goToLastPageButton1 = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]/span"));
+            goToLastPageButton1.Click();
+            Thread.Sleep(2000);
+
 
 
         }

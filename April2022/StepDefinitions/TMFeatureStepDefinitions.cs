@@ -66,7 +66,7 @@ namespace April2022.StepDefinitions
 
 
         [When(@"I update '([^']*)', '([^']*)' and '([^']*)'  a new time and  material record")]
-        public void WhenIUpdateAndANewTimeAndMaterialRecord(string p0, string p1, string p2)
+        public void WhenIUpdateAndANewTimeAndMaterialRecord(string p0,string p1,string p2)
         {
             tmPageObject.EditTM(driver, p0,p1,p2);
 
@@ -74,7 +74,7 @@ namespace April2022.StepDefinitions
 
 
         [Then(@"the record should have the update '([^']*)', '([^']*)' and '([^']*)'")]
-        public void ThenTheRecordShouldHaveTheUpdateAnd(string p0, string p1, string p2)
+        public void ThenTheRecordShouldHaveTheUpdateAnd(string p0,string p1,string p2)
         {
             
             string editedDescription = tmPageObject.GetEditedDescription(driver);
